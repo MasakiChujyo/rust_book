@@ -8,7 +8,7 @@ use std::io;
 // Save Ctrl+S
 
 fn main() {
-    ch4_5();
+    ch5();
 }
 
 fn ch2() {
@@ -165,6 +165,22 @@ fn ch4_5() {
     let rr2 = &mut s1;
     println!("{}", rr2);
 
+    // 文字列スライス
+    let s = String::from("hello my sister");
+    let h = &s[0..5];
+    println!("{}", h);
+    let slice = &s[1..];
+    println!("{}", slice);
+
+    let mojiretu = "this is mojiretu literal";
+    println!("{}", &mojiretu[0..5]);
+
+    let q = [1, 2, 3, 4, 5];
+    let slice = &q[0..3];
+    for num in slice {
+        println!("{}", num);
+    }
+
     //
 }
 
@@ -176,3 +192,48 @@ fn calc_length(s: &String) -> usize {
 fn add_san(s: &mut String) {
     s.push_str(" san");
 }
+
+fn ch5() {
+    //可変なStruct
+    let mut user1 = User {
+        email: String::from("thisistestmail@gmail.comm"),
+        username: String::from("whoareyou"),
+        active: true,
+        sign_in_count: 1,
+    };
+    println!("{}", user1.username);
+    user1.username = String::from("whodunit");
+    println!("{}", user1.username);
+
+    let mut user2 = build_user(
+        "thisisanotheruser@gmail.comm".to_string(),
+        "man".to_string(),
+    );
+    println!("{}", user2.username);
+
+    // Point struct
+    let x = Point(0, 0);
+}
+
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+}
+
+fn build_user(email: String, username: String) -> User {
+    // 略記ができる.
+    // 本来なら
+    // username: username,
+    // email: email,
+    User {
+        username,
+        email,
+        sign_in_count: 1,
+        active: true,
+    }
+}
+
+// tupleみたいな構造体
+struct Point(i32, i32);
