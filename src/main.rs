@@ -1,3 +1,5 @@
+use std::vec;
+
 fn ch6() {
     let home = IpAddr::V4(127, 0, 0, 1);
     println!("{:#?}", home);
@@ -40,6 +42,35 @@ fn value_in_cents(coin: Coin) -> u32 {
     }
 }
 
+fn ch8() {
+    let mut v: Vec<i32> = Vec::new();
+    v.push(1);
+    v.push(2);
+    v.push(3);
+    let num = vec![1, 2, 3];
+
+    println!("s{:?}", v);
+    println!("{:?}", num);
+
+    let third: &i32 = &v[2];
+    println!("{}", third);
+
+    match num.get(2) {
+        Some(third) => println!("{}", third),
+        None => println!("None, that means v.get -> Option<&T>"),
+    }
+
+    for i in &mut v {
+        println!("{}", i);
+        *i += 100;
+    }
+    v[0] += 1;
+    v.pop();
+    for i in &v {
+        println!("{}", i);
+    }
+}
+
 fn main() {
-    ch6();
+    ch8();
 }
